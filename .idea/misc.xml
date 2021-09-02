@@ -4,8 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/drawable/rounded_button_login_register.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/drawable/rounded_button_register.xml" value="0.2703125" />
+        <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/drawable/rounded_edittext_login_register.xml" value="0.1390625" />
+        <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/drawable/rounded_imageview_register.xml" value="0.2703125" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/layout/acitivity_login.xml" value="0.264" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/layout/activity_register.xml" value="0.18840579710144928" />
       </map>
     </option>
   </component>

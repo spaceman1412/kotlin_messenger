@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 
@@ -21,7 +22,14 @@ class LoginActivity : AppCompatActivity() {
             Log.d("Login","Attempt login with email/passwd: $email/***")
 
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
-
+                .addOnCompleteListener {
+                    if(!it.isSuccessful) return@addOnCompleteListener
+                    Log.d("Main","Successful login! with email: $email")
+                }
+                .addOnFailureListener {
+                    Log.d("Main","Failure to login")
+                    Toast.makeText(this,"Failed to login email: ${it.message}", Toast.LENGTH_SHORT).show()
+                }
         }
 
         findViewById<TextView>(R.id.back_to_register_button_login).setOnClickListener {
