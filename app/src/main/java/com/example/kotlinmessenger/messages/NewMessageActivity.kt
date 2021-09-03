@@ -1,12 +1,13 @@
-package com.example.kotlinmessenger
+package com.example.kotlinmessenger.messages
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.google.firebase.auth.FirebaseAuth
+import com.example.kotlinmessenger.R
+import com.example.kotlinmessenger.models.User
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -30,7 +31,13 @@ class NewMessageActivity : AppCompatActivity() {
 //        recyclerView_new_message.adapter = adapter
 //
         fetchUser()
+
     }
+
+    companion object{
+        val USER_KEY = "USER_KEY"
+    }
+
     private fun fetchUser(){
         val ref = FirebaseDatabase.getInstance().getReference("/users")
         ref.addListenerForSingleValueEvent(object: ValueEventListener{
@@ -41,6 +48,18 @@ class NewMessageActivity : AppCompatActivity() {
                    val user = it.getValue(User::class.java)
                     if(user!=null) adapter.add(UserItem(user))
                 }
+
+                adapter.setOnItemClickListener { item, view ->
+
+                    val userItem = item as UserItem
+                    val intent = Intent(view.context,ChatLogActivity::class.java)
+//                    intent.putExtra(USER_KEY ,userItem.user.username)
+                    intent.putExtra(USER_KEY ,userItem.user)
+                    startActivity(intent)
+
+                    finish()    //finish NewMessageActivity Screen
+                }
+
                 findViewById<RecyclerView>(R.id.recyclerView_new_message).adapter = adapter
             }
             override fun onCancelled(error: DatabaseError) {
