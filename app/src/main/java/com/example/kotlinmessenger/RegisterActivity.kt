@@ -30,15 +30,15 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         findViewById<TextView>(R.id.already_have_account_textView_register).setOnClickListener {
-            Log.d("RegisterActivity","Try to show activity")
+            Log.d("RegisterActivity", "Try to show activity")
 
             //launch the login acitivity
-            val intent = Intent(this,LoginActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
         findViewById<Button>(R.id.select_photo_button_register).setOnClickListener {
-            Log.d("RegisterActivity","Try to select photo")
+            Log.d("RegisterActivity", "Try to select photo")
 
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
@@ -46,14 +46,14 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    var selectedUri : Uri? = null
+    var selectedUri: Uri? = null
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
+        if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
             //proceed check what image selected was
-            Log.d("RegisterActivity","Photo selected")
+            Log.d("RegisterActivity", "Photo selected")
 
             selectedUri = data.data
 
@@ -72,62 +72,77 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun performRegister(){
+    private fun performRegister() {
         val email = findViewById<EditText>(R.id.email_editText_register).text.toString()
         val password = findViewById<EditText>(R.id.passwd_editText_register).text.toString()
 
-        if(email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this,"Please enter text in email/pw",Toast.LENGTH_SHORT).show()
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Please enter text in email/pw", Toast.LENGTH_SHORT).show()
             return
         }
 
-        Log.d("RegisterActivity","Email is " + email)
-        Log.d("RegisterActivity","Password is $password")
+        Log.d("RegisterActivity", "Email is " + email)
+        Log.d("RegisterActivity", "Password is $password")
 
         //Firebase authentication to create a username and password
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (!it.isSuccessful) return@addOnCompleteListener
 
                 //else if successful
-                Log.d("RegisterActivity","Successfully created user with uid: ${it.result?.user?.uid}")
+                Log.d(
+                    "RegisterActivity",
+                    "Successfully created user with uid: ${it.result?.user?.uid}"
+                )
 
                 uploadImageToFirebaseStorage()
             }
             .addOnFailureListener {
-                Log.d("RegisterActivity","Failed to create user: ${it.message}")
+                Log.d("RegisterActivity", "Failed to create user: ${it.message}")
 
-                Toast.makeText(this,"Failed to create user: ${it.message}",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Failed to create user: ${it.message}", Toast.LENGTH_SHORT)
+                    .show()
             }
     }
 
-    private fun uploadImageToFirebaseStorage(){
-        if(selectedUri == null) return
+    private fun uploadImageToFirebaseStorage() {
+        if (selectedUri == null) return
 
         val filename = UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
 
         ref.putFile(selectedUri!!)
             .addOnSuccessListener {
-                Log.d("RegisterActivity","Sucessfully uploaded image: ${it.metadata?.path}")
+                Log.d("RegisterActivity", "Sucessfully uploaded image: ${it.metadata?.path}")
 
                 ref.downloadUrl.addOnSuccessListener {
-                    Log.d("RegisterActivity","File Location: ${it}")
+                    Log.d("RegisterActivity", "File Location: ${it}")
                     savedUserToFireDatabase(it.toString())
                 }
             }
 
     }
-    private fun savedUserToFireDatabase(profileImageUrl: String){
+
+    private fun savedUserToFireDatabase(profileImageUrl: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-        val user = User(uid, findViewById<EditText>(R.id.username_editText_register).text.toString(), profileImageUrl)
+        val user = User(
+            uid,
+            findViewById<EditText>(R.id.username_editText_register).text.toString(),
+            profileImageUrl
+        )
 
         ref.setValue(user)
             .addOnSuccessListener {
-                Log.d("RegisterActivity","Finally save the user to firebase database")
+                Log.d("RegisterActivity", "Finally save the user to firebase database")
+
+                val intent = Intent(this,LastestMessageActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
             }
     }
 }
 
-class User( val uid: String ,val username: String, val profileImageUrl: String)
+class User(val uid: String, val username: String, val profileImageUrl: String){
+    constructor() : this("","","")
+}

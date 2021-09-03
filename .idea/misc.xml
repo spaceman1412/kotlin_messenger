@@ -8,8 +8,12 @@
         <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/drawable/rounded_edittext_login_register.xml" value="0.1390625" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/drawable/rounded_imageview_register.xml" value="0.2703125" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/layout/acitivity_login.xml" value="0.264" />
+        <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/layout/activity_lastest_message.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/layout/activity_new_message.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/layout/activity_register.xml" value="0.18840579710144928" />
+        <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/layout/user_row_new_message.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/menu/nav_menu.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>
