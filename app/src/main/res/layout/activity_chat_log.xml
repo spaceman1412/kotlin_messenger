@@ -15,6 +15,7 @@
         android:layout_marginBottom="8dp"
         android:background="@color/white"
         android:ems="10"
+        android:focusable="false"
         android:hint="Enter Message"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"

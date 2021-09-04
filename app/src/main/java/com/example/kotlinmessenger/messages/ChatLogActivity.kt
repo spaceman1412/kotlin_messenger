@@ -88,7 +88,7 @@ class ChatLogActivity : AppCompatActivity() {
                     }
 
                 }
-
+                findViewById<RecyclerView>(R.id.recyclerView_chat_log).scrollToPosition(adapter.itemCount -1)
             }
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {

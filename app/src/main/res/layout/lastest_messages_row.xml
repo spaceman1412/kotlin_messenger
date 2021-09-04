@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="120dp">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView_lastest_messages"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="16dp"
+        app:civ_border_color="@color/black"
+        app:civ_border_width="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,11 +22,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Username"
+        tools:text = "Username"
         android:textStyle="bold"
+        android:textSize="16sp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/lastest_message_textView_lastest_message"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/imageView_lastest_messages"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -35,10 +38,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Lastest Message"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/imageView_lastest_messages"
         app:layout_constraintTop_toBottomOf="@+id/username_textView_lastest_message" />
 </androidx.constraintlayout.widget.ConstraintLayout>

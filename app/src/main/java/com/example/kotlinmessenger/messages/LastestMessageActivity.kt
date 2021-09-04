@@ -6,22 +6,29 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinmessenger.R
 import com.example.kotlinmessenger.models.ChatMessage
 import com.example.kotlinmessenger.models.User
 import com.example.kotlinmessenger.registerlogin.RegisterActivity
+import com.example.kotlinmessenger.views.LastestMessageRow
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
+import de.hdodenhof.circleimageview.CircleImageView
 
 class LastestMessageActivity : AppCompatActivity() {
 
     companion object {
         var currentUser: User? = null
+        val TAG = "LastestMessages"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,8 +38,23 @@ class LastestMessageActivity : AppCompatActivity() {
 
 //        setUpDummyRow()
 
-        val recyclerView : RecyclerView = findViewById(R.id.recyclerView_lastest_messages)
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerView_lastest_messages)
         recyclerView.adapter = adapter
+        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+
+        //set item click listener on your adapter
+        adapter.setOnItemClickListener { item, view ->
+            Log.d(TAG,"Clicked")
+            val intent = Intent(this,ChatLogActivity::class.java)
+
+            //we are missing the chat partner user
+
+            val row = item as LastestMessageRow
+            row.chatPartnerUser
+
+            intent.putExtra(NewMessageActivity.USER_KEY, row.chatPartnerUser )
+            startActivity(intent)
+        }
 
         listenForLastestMessages()
 
@@ -43,17 +65,17 @@ class LastestMessageActivity : AppCompatActivity() {
     val lastestMessagesMap = HashMap<String, ChatMessage>()
 
 
-    private fun refreshRecyclerViewMessages(){
+    private fun refreshRecyclerViewMessages() {
         adapter.clear()
         lastestMessagesMap.values.forEach {
             adapter.add(LastestMessageRow(it))
         }
     }
 
-    private fun listenForLastestMessages(){
+    private fun listenForLastestMessages() {
         val fromId = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/lastest-messages/$fromId")
-        ref.addChildEventListener(object : ChildEventListener{
+        ref.addChildEventListener(object : ChildEventListener {
 
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java) ?: return
@@ -70,26 +92,17 @@ class LastestMessageActivity : AppCompatActivity() {
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
 
             }
+
             override fun onChildRemoved(snapshot: DataSnapshot) {
 
             }
+
             override fun onCancelled(error: DatabaseError) {
 
             }
         })
 
     }
-
-    class LastestMessageRow(val chatMessage: ChatMessage) : Item<GroupieViewHolder>(){
-        override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-            viewHolder.itemView.findViewById<TextView>(R.id.lastest_message_textView_lastest_message).text = chatMessage.text
-        }
-
-        override fun getLayout(): Int {
-            return R.layout.lastest_messages_row
-        }
-    }
-
     val adapter = GroupAdapter<GroupieViewHolder>()
 
 //    private fun setUpDummyRow(){
@@ -103,11 +116,11 @@ class LastestMessageActivity : AppCompatActivity() {
     private fun fetchCurrentUser(){
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-        ref.addListenerForSingleValueEvent(object : ValueEventListener{
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                currentUser = snapshot.getValue(User::class.java)
-                Log.d("LastestActivity","Current user ${currentUser?.username}")
+                LastestMessageActivity.currentUser = snapshot.getValue(User::class.java)
+                Log.d("LastestActivity","Current user ${LastestMessageActivity.currentUser?.username}")
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -149,3 +162,4 @@ class LastestMessageActivity : AppCompatActivity() {
 
     }
 }
+
