@@ -32,13 +32,14 @@ class ChatLogActivity : AppCompatActivity() {
 
     val adapter = GroupAdapter<GroupieViewHolder>()
 
+
     var toUser : User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
-
         val recyclerView : RecyclerView = findViewById(R.id.recyclerView_chat_log)
+
         recyclerView.adapter = adapter
 
 //        val username = intent.getStringExtra(NewMessageActivity.USER_KEY)
@@ -57,7 +58,11 @@ class ChatLogActivity : AppCompatActivity() {
     }
 
     private fun listenForMessages(){
-        val ref = FirebaseDatabase.getInstance().getReference("/messages")
+
+        val fromId = FirebaseAuth.getInstance().uid
+        val toId = toUser?.uid
+
+        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId")
 
         ref.addChildEventListener(object: ChildEventListener{
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
@@ -111,13 +116,19 @@ class ChatLogActivity : AppCompatActivity() {
 
         if(fromId == null || toId == null) return
 
-        val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
+//        val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
+        val reference = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
+        val toReference = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
 
         val chatMessage = ChatMessage(reference.key!!,text,fromId,toId,System.currentTimeMillis()/1000)
         reference.setValue(chatMessage)
             .addOnSuccessListener {
                 Log.d(TAG,"Saved our chat message: ${reference.key}")
+                findViewById<EditText>(R.id.editText_chat_log).text.clear()
+                val recyclerView : RecyclerView = findViewById(R.id.recyclerView_chat_log)
+                recyclerView.scrollToPosition(adapter.itemCount - 1)
             }
+        toReference.setValue(chatMessage)
     }
 
 

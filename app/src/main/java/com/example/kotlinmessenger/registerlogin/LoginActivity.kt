@@ -1,5 +1,6 @@
 package com.example.kotlinmessenger.registerlogin
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -8,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kotlinmessenger.R
+import com.example.kotlinmessenger.messages.LastestMessageActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
@@ -25,6 +27,9 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener {
                     if(!it.isSuccessful) return@addOnCompleteListener
                     Log.d("Main","Successful login! with email: $email")
+                    val intent = Intent(this,LastestMessageActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
                 }
                 .addOnFailureListener {
                     Log.d("Main","Failure to login")
