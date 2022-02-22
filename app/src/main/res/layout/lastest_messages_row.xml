@@ -40,8 +40,18 @@
         android:text="Lastest Message"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toStartOf="@+id/date_time_textView"
         app:layout_constraintStart_toEndOf="@+id/imageView_lastest_messages"
         app:layout_constraintTop_toBottomOf="@+id/username_textView_lastest_message" />
+
+    <TextView
+        android:id="@+id/date_time_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="date_time_textView"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

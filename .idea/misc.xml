@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/drawable/ic_new_text_document.xml" value="0.2703125" />
+        <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/drawable/ic_square.xml" value="0.2703125" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/drawable/rounded_button_login_register.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/drawable/rounded_button_register.xml" value="0.2703125" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/drawable/rounded_edittext_login_register.xml" value="0.1390625" />

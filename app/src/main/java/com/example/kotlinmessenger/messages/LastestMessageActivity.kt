@@ -36,6 +36,7 @@ class LastestMessageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_lastest_message)
         fetchCurrentUser()
 
+
 //        setUpDummyRow()
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView_lastest_messages)

@@ -22,6 +22,8 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import de.hdodenhof.circleimageview.CircleImageView
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class LastestMessageRow(val chatMessage: ChatMessage) : Item<GroupieViewHolder>(){
@@ -38,6 +40,12 @@ class LastestMessageRow(val chatMessage: ChatMessage) : Item<GroupieViewHolder>(
         }else {
             chatPartnerId = chatMessage.fromId
         }
+
+        val date : String? = getDateTime(chatMessage.timestamp)
+
+        val datetimeTextView : TextView = viewHolder.itemView.findViewById(R.id.date_time_textView)
+
+        datetimeTextView.text = date
 
         val ref = FirebaseDatabase.getInstance().getReference("/users/$chatPartnerId")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -61,6 +69,15 @@ class LastestMessageRow(val chatMessage: ChatMessage) : Item<GroupieViewHolder>(
 
     override fun getLayout(): Int {
         return R.layout.lastest_messages_row
+    }
+    private fun getDateTime(s: Long): String? {
+        try {
+            val sdf = SimpleDateFormat("dd/MM/yyyy, HH:mm")
+            val netDate = Date(s * 1000)
+            return sdf.format(netDate)
+        } catch (e: Exception) {
+            return e.toString()
+        }
     }
 }
 
