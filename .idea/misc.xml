@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/drawable/ic_icons8_facebook_messenger.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/drawable/ic_new_text_document.xml" value="0.2703125" />
+        <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/drawable/ic_outline_message_24.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/drawable/ic_square.xml" value="0.2703125" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/drawable/rounded_button_login_register.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/drawable/rounded_button_register.xml" value="0.2703125" />
@@ -20,6 +22,7 @@
         <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/layout/lastest_messages_row.xml" value="0.4" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/layout/user_row_new_message.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/menu/nav_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Space/AndroidStudioProjects/KotlinMessenger/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.20052083333333334" />
       </map>
     </option>
   </component>

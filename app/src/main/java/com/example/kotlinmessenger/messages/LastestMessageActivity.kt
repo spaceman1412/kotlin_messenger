@@ -34,7 +34,11 @@ class LastestMessageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lastest_message)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_icons8_facebook_messenger)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         fetchCurrentUser()
+
 
 
 //        setUpDummyRow()
