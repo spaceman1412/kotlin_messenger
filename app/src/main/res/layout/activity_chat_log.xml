@@ -7,9 +7,6 @@
     tools:context=".messages.ChatLogActivity">
 
 
-
-
-
     <EditText
         android:id="@+id/editText_chat_log"
         android:layout_width="0dp"
@@ -43,7 +40,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:background="@android:color/holo_green_light"
+        android:background="@android:color/holo_blue_bright"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/editText_chat_log"
         app:layout_constraintEnd_toEndOf="parent"
